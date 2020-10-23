@@ -1,0 +1,249 @@
+\documentclass{article}
+\usepackage{plext}
+\usepackage{subfiles}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{parskip}
+\usepackage{ascmac}
+\usepackage{amsmath,amssymb}
+\usepackage{cleveref}
+    \crefname{proposition}{命題}{命題}
+    \crefname{theorem}{定理}{定理}
+    \crefname{lemma}{行間}{行間}
+    \crefmultiformat{lemma}{行間~#2#1#3}{,~#2#1#3}{, #2#1#3}{,~#2#1#3}
+\usepackage{amsthm}
+    \makeatletter
+    \renewenvironment{proof}[1][\proofname]{\par
+        \pushQED{\qed}
+        \normalfont
+        \topsep6\p@\@plus6\p@ \trivlist
+        \item[\hskip\labelsep{\bfseries #1}\@addpunct{\bfseries}]\ignorespaces
+    }{%
+        \popQED\endtrivlist\@endpefalse
+    }
+    \renewcommand{\proofname}{\underline{証明.}}
+    \renewcommand{\qedsymbol}{$\blacksquare$}
+    \makeatother
+\usepackage{listings}
+\usepackage{siunitx}
+\usepackage{mhchem}
+\usepackage{bm}
+\usepackage{afterpage}
+\usepackage{url}
+\usepackage{fancyhdr}
+    \pagestyle{fancy}
+    \lhead{微分積分学② 行間埋め}
+    \rhead{yahata}
+
+\newtheorem{proposition}{命題}
+\newtheorem{theorem}{定理}
+\newtheorem{lemma}{行間}
+\newcommand{\combination}[2]{{}_{#1} \mathrm{C}_{#2}}
+
+\begin{document}
+
+% ==========
+% Description
+% ==========
+微分積分学②（火曜4限; O先生）の講義資料の行間を埋める資料です。
+\tableofcontents
+\newpage
+
+% ==========
+% Section 8
+% ==========
+\setcounter{section}{7}
+\section{テイラーの定理（2変数 version）}
+
+\subsection{連鎖律と数学的帰納法}
+次の命題は、テイラーの定理（2変数 version）の証明のなかで
+「同様に連鎖律をくり返し使うことにより…」と議論が省略されている部分です。
+\begin{screen}
+    \begin{lemma}
+        自然数$k=1,2,\dots,n+1$に対して
+        \begin{equation}
+            \label{lemma:1}
+            \varphi^{(k)}(t)
+            =
+            \sum_{i=0}^{k}
+                \combination{k}{i}
+                \frac{\partial^k f}{\partial x^{k-i} \partial y^{i}} (x(t), y(t))
+                \cdot
+                (x_1 - x_0)^{k-i}
+                (y_1 - y_0)^{i}
+        \end{equation}
+        が成立する。ただし$n, \varphi, f, x, y$は講義資料で定義されたものである。
+    \end{lemma}
+\end{screen}
+
+\begin{proof}
+    $\Delta x = x_1 - x_0, \Delta y = y_1 - y_0$とおく。
+    まず$k=1$に対して\cref{lemma:1}は明らかに成立する。
+    つぎに$k\,(=1,2,\dots,n)$を任意にとり、\cref{lemma:1}の成立を仮定する。
+    \cref{lemma:1}の両辺を$t$で微分して次を得る。
+    \begin{alignat}{1}
+        \varphi^{k+1}(t) &= 
+            \sum_{i=0}^{k}
+                \combination{k}{i}
+                \bigg\{
+                \frac{\partial^{k+1} f}{\partial x^{k+1-i} \partial y^{i}} (x(t), y(t))
+                \Delta x^{k+1-i}
+                \Delta y^{i} \nonumber \\
+        &\quad +
+                \frac{\partial^{k+1} f}{\partial x^{k-i} \partial y^{i+1}} (x(t), y(t))
+                \Delta x^{k-i}
+                \Delta y^{i+1}
+                \bigg\} \\
+        &= 
+            \sum_{i=0}^{k}
+                \combination{k}{i}
+                \frac{\partial^{k+1} f}{\partial x^{k+1-i} \partial y^{i}} (x(t), y(t))
+                \Delta x^{k+1-i}
+                \Delta y^{i} \nonumber \\
+        &\quad +
+            \sum_{i=0}^{k}
+                \combination{k}{i}
+                \frac{\partial^{k+1} f}{\partial x^{k-i} \partial y^{i+1}} (x(t), y(t))
+                \Delta x^{k-i}
+                \Delta y^{i+1} \\
+        % 一段ずらす
+        &= 
+            \sum_{i=0}^{k}
+                \combination{k}{i}
+                \frac{\partial^{k+1} f}{\partial x^{k+1-i} \partial y^{i}} (x(t), y(t))
+                \Delta x^{k+1-i}
+                \Delta y^{i} \nonumber \\
+        &\quad +
+            \sum_{i=1}^{k+1}
+                \combination{k}{i-1}
+                \frac{\partial^{k+1} f}{\partial x^{k+1-i} \partial y^{i}} (x(t), y(t))
+                \Delta x^{k+1-i}
+                \Delta y^{i} \\
+        &= 
+            \frac{\partial^{k+1} f}{\partial x^{k+1}} (x(t), y(t))
+            \Delta x^{k+1}
+            +
+            \frac{\partial^{k+1} f}{\partial y^{k+1}} (x(t), y(t))
+            \Delta y^{k+1} \nonumber \\
+        &\quad +
+            \sum_{i=1}^{k}
+                \combination{k+1}{i}
+                \frac{\partial^{k+1} f}{\partial x^{k+1-i} \partial y^{i}} (x(t), y(t))
+                \Delta x^{k+1-i}
+                \Delta y^{i} \\
+        &=
+            \sum_{i=0}^{k+1}
+                \combination{k+1}{i}
+                \frac{\partial^{k+1} f}{\partial x^{k+1-i} \partial y^{i}} (x(t), y(t))
+                \Delta x^{k+1-i}
+                \Delta y^{i}
+    \end{alignat}
+    したがって$k+1$に対しても\cref{lemma:1}が成立する。
+    以上より、自然数$k=1,2,\dots,n+1$に対して\cref{lemma:1}が成立する。
+\end{proof}
+
+% ==========
+% Section 9
+% ==========
+\section{$C^2$級の2変数関数の極大・極小}
+
+\subsection{極値を取るための必要条件}
+次の命題は「すぐにわかる」ものです。
+\begin{screen}
+    \begin{lemma}
+        点$(x_0, y_0)$で$f$が極大、または極小になるならば
+        \begin{equation}
+            \frac{\partial f}{\partial x}(x_0, y_0) = 0
+            \quad \mbox{かつ} \quad
+            \frac{\partial f}{\partial y}(x_0, y_0) = 0
+        \end{equation}
+        である。ただし$x_0, y_0, f$は講義資料で定義されたものである。
+    \end{lemma}
+\end{screen}
+
+\begin{proof}
+    点$(x_0, y_0)$が$f$の極大点である場合を示す。極小点の場合も同様である。
+    一変数関数$g, h$を$g(x) = f(x, y_0),\,h(y) = f(x_0, y)$と定めると、
+    $g, h$はそれぞれ点$x_0, y_0$で微分可能であって局所的に最大となる。
+    したがって、共通資料第4章命題2より
+    点$x_0, y_0$はそれぞれ$g, h$の停留点である。よって
+    \begin{equation}
+        \frac{\partial f}{\partial x}(x_0, y_0) = g'(x_0) = 0
+        ,\quad
+        \frac{\partial f}{\partial y}(x_0, y_0) = h'(y_0) = 0
+    \end{equation}
+    が従う。
+\end{proof}
+
+\subsection{$A, B, C$ と $a, b, c$ の関係性}
+次の命題は、$A, B, C$に関する大小関係がまわりの$a, b, c$に関しても成立するというものです。
+\begin{screen}
+    \begin{lemma}
+        $(x_0, y_0)$に十分近い任意の点$(x, y)$に対して
+        \begin{equation}
+            A > 0
+            \,\mbox{かつ}\,
+            AC - B^2 > 0
+            \quad \Longrightarrow \quad
+            \mbox{常に}\,
+            a > 0
+            \,\mbox{かつ}\,
+            ac - b^2 > 0
+        \end{equation}
+        が成立する。ただし$x, y, x_0, y_0, A, B, C, a, b, c$は講義資料で定義されたものである。
+    \end{lemma}
+\end{screen}
+
+\begin{proof}
+    $(x, y) \rightarrow (x_0, y_0)$で
+    \begin{alignat}{1}
+        a &\rightarrow A > 0 \\
+        ac - b^2 &\rightarrow AC - B^2 > 0
+    \end{alignat}
+    なので、ある$\delta > 0$が存在して
+    \begin{equation}
+        0 < \| (x, y) - (x_0, y_0) \| < \delta
+        \quad \Longrightarrow \quad
+        a > 0
+        \,\mbox{かつ}\,
+        ac - b^2 > 0
+    \end{equation}
+    が成立する。
+\end{proof}
+
+\subsection{「$|t|$: 十分小」の意味}
+ところで「$AC-B^2<0$の場合」というスライドでは「$|t|$: 十分小」という制約が登場しますが、
+これは何のためにあるのか気になりませんか？
+O先生に尋ねたところ次のような回答でした。証明はとくにありません。
+\begin{screen}
+    \begin{lemma}
+        「$|t|$: 十分小」という制約は、$f$が$C^2$級である領域の上を点$(x_0 + t, y_0)$が動くように課されている。
+    \end{lemma}
+\end{screen}
+
+\subsection{「iii) $A=0$のとき」の省略された計算）}
+以下の計算が省略されています。
+\begin{screen}
+    \begin{lemma}
+        講義資料のように
+        \begin{equation}
+            \varphi(t) = f(x_0 + p_1 t, y_0 + t),
+            \quad
+            \psi(t)    = f(x_0 + p_2 t, y_0 + t)
+        \end{equation}
+        とおくと次が成り立つ。
+        \begin{equation}
+            \varphi'(0) = \psi'(0) = 0,
+            \quad
+            \varphi''(0) = 2p_1 B + C,
+            \quad
+            \psi''(0)    = 2p_2 B + C
+        \end{equation}
+        ただし$x_0, y_0, p_1, p_2, B, C$は講義資料で定義されたものである。
+    \end{lemma}
+\end{screen}
+
+\begin{proof}
+    $\varphi$ についてのみ示す。$\psi$ の場合も同様である。
+\end{proof}
+
+\end{document}
