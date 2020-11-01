@@ -1,7 +1,4 @@
 \documentclass{article}
-\usepackage{plext}
-\usepackage{subfiles}
-\usepackage[dvipdfmx]{graphicx}
 \usepackage{parskip}
 \usepackage{ascmac}
 \usepackage{amsmath,amssymb}
@@ -23,12 +20,11 @@
     \renewcommand{\proofname}{\underline{証明.}}
     \renewcommand{\qedsymbol}{$\blacksquare$}
     \makeatother
-\usepackage{listings}
-\usepackage{siunitx}
-\usepackage{mhchem}
 \usepackage{bm}
 \usepackage{afterpage}
 \usepackage{url}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
 \usepackage{fancyhdr}
     \pagestyle{fancy}
     \lhead{微分積分学② 行間埋め}
@@ -327,6 +323,9 @@ O先生に尋ねたところ次のような回答でした．証明はとくに�
     が成立する．
 \end{proof}
 
+% ==========
+% 3.4
+% ==========
 \setcounter{subsection}{3}
 \subsection{有界な関数のリーマン積分可能性・不可能性}
 \subsubsection{すぐに分かること②}
@@ -377,7 +376,7 @@ O先生に尋ねたところ次のような回答でした．証明はとくに�
 \end{screen}
 
 \begin{proof}
-    数学IA演習(2014年度)第9回
+    数学IA演習(2014年度)第9回講義資料
     \footnote{\url{https://lecture.ecc.u-tokyo.ac.jp/~nkiyono/14_kami.html}}
     \footnote{K先生の資料は神です}
     の定理8で証明されている．
@@ -398,9 +397,10 @@ O先生に尋ねたところ次のような回答でした．証明はとくに�
 \end{screen}
 
 \begin{proof}
-    数学IA演習(2014年度)第9回
+    数学IA演習(2014年度)第9回講義資料
     \footnote{\url{https://lecture.ecc.u-tokyo.ac.jp/~nkiyono/14_kami.html}}
-    の定理番号を用いて証明の流れを示す．
+    で証明されている．
+    以下，講義資料内の定理番号を用いて証明の流れを示す．
 
     \cref{lemma:9}の主張は直接的には
     定理13「積分可能条件：$\epsilon$-$\delta$バージョン」として証明されるが，
@@ -413,6 +413,99 @@ O先生に尋ねたところ次のような回答でした．証明はとくに�
             &\Longleftrightarrow \mbox{定理4のいう積分可能条件} \\
             &\underbrace{\Longleftrightarrow}_{\mbox{\scriptsize 定理2,3}} \mbox{定義}
     \end{align*}
+\end{proof}
+
+% ==========
+% 3.5
+% ==========
+\subsection{リーマン積分の基本性質}
+\subsubsection{リーマン積分の線型性(1)}
+
+\begin{screen}
+    \begin{lemma}
+        関数$f:[a,b]\rightarrow\mathbb{R}$，$g:[a,b]\rightarrow\mathbb{R}$がともに
+        リーマン積分可能であるとき，
+        関数$f+g: [a,b] \rightarrow \mathbb{R} \, (x \mapsto f(x) + g(x))$もリーマン積分可能で
+        \begin{equation}
+            \int_a^b (f(x) + g(x)) dx = \int_a^b f(x) dx + \int_a^b g(x) dx
+            \label{lemma:10:1}
+        \end{equation}
+    \end{lemma}
+\end{screen}
+
+\begin{proof}
+    表記の簡略化のため$\alpha = \int_a^b f(x) dx$，$\beta = \int_a^b g(x) dx$とおく．
+
+    正数$\epsilon$を任意にとる．
+    $f, g$がリーマン積分可能であることから，ある正数$\delta$が存在して
+    \begin{equation}
+        \nonumber
+        \begin{cases}
+            |\triangle| < \delta \mbox{ なる } [a, b] \mbox{ の任意の分割 } \triangle \\
+            \triangle \mbox{ の任意の代表点集合 } \mathbf{\xi}
+        \end{cases}
+        \mbox{に対し} \quad
+        \begin{cases}
+            |R(f: \triangle, \mathbf{\xi}) - \alpha| < \epsilon / 2 \\
+            |R(f: \triangle, \mathbf{\xi}) - \beta | < \epsilon / 2
+        \end{cases}
+    \end{equation}
+    が成立する．ここで，リーマン和の定義から明らかに
+    \begin{equation}
+        R(f + g: \triangle, \mathbf{\xi}) = R(f: \triangle, \mathbf{\xi}) + R(g: \triangle, \mathbf{\xi})
+    \end{equation}
+    なので
+    \begin{alignat}{1}
+        |R(f + g: \triangle, \mathbf{\xi}) - (\alpha + \beta)|
+            &= |R(f: \triangle, \mathbf{\xi}) + R(g: \triangle, \mathbf{\xi}) - (\alpha + \beta)| \\
+            &\leq |R(f: \triangle, \mathbf{\xi}) - \alpha| + |R(g: \triangle, \mathbf{\xi}) - \beta| \\
+            &< \epsilon
+    \end{alignat}
+    が成立する．したがって\cref{lemma:10:1}が成立する．
+\end{proof}
+
+\subsubsection{リーマン積分の線型性(2)}
+
+\begin{screen}
+    \begin{lemma}
+        関数$f:[a,b]\rightarrow\mathbb{R}$がリーマン積分可能であるとき，
+        $\forall c \in \mathbb{R}$に対し，
+        関数$cf: [a,b] \rightarrow \mathbb{R} \, (x \mapsto cf(x))$もリーマン積分可能で
+        \begin{equation}
+            \int_a^b cf(x) dx = c \int_a^b f(x) dx
+            \label{lemma:10:2}
+        \end{equation}
+    \end{lemma}
+\end{screen}
+
+\begin{proof}
+    表記の簡略化のため$\alpha = \int_a^b f(x) dx$とおく．
+
+    $c \in \mathbb{R}$を任意にとる．
+    正数$\epsilon$を任意にとる．
+    $f$がリーマン積分可能であることから，ある正数$\delta$が存在して
+    \begin{equation}
+        \nonumber
+        \begin{cases}
+            |\triangle| < \delta \mbox{ なる } [a, b] \mbox{ の任意の分割 } \triangle \\
+            \triangle \mbox{ の任意の代表点集合 } \mathbf{\xi}
+        \end{cases}
+        \mbox{に対し} \quad
+        |R(f: \triangle, \mathbf{\xi}) - \alpha| < \dfrac{\epsilon}{|c| + 2}
+    \end{equation}
+    が成立する．ここで，リーマン和の定義から明らかに
+    \begin{equation}
+        R(cf: \triangle, \mathbf{\xi}) = cR(f: \triangle, \mathbf{\xi})
+    \end{equation}
+    なので
+    \begin{alignat}{1}
+        |R(cf: \triangle, \mathbf{\xi}) - c\alpha|
+            &= |cR(f: \triangle, \mathbf{\xi}) - c\alpha| \\
+            &= |c||R(f: \triangle, \mathbf{\xi}) - \alpha| \\
+            &\leq |c| \dfrac{\epsilon}{|c| + 2} \\
+            &< \epsilon
+    \end{alignat}
+    が成立する．したがって\cref{lemma:10:2}が成立する．
 \end{proof}
 
 \end{document}

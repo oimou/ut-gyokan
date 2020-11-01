@@ -13,3 +13,6 @@
 \contentsline {subsubsection}{\numberline {3.4.1}すぐに分かること②}{6}
 \contentsline {subsubsection}{\numberline {3.4.2}有界閉区間上の連続関数の一様連続性}{7}
 \contentsline {subsubsection}{\numberline {3.4.3}リーマンの判定法}{7}
+\contentsline {subsection}{\numberline {3.5}リーマン積分の基本性質}{8}
+\contentsline {subsubsection}{\numberline {3.5.1}リーマン積分の線型性(1)}{8}
+\contentsline {subsubsection}{\numberline {3.5.2}リーマン積分の線型性(2)}{9}
