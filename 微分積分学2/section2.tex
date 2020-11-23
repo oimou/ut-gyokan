@@ -1,0 +1,224 @@
+\documentclass[./index]{subfiles}
+\begin{document}
+%==========
+% 2.8
+% ==========
+\setcounter{section}{1}
+\section{多変数関数の微分}
+\setcounter{subsection}{7}
+\subsection{テイラーの定理（2変数 version）}
+
+\subsubsection{連鎖律と数学的帰納法}
+\begin{screen}
+    \begin{proposition}
+        自然数$k=1,2,\dots,n+1$に対して
+        \begin{equation}
+            \label{proposition:1}
+            \varphi^{(k)}(t)
+            =
+            \sum_{i=0}^{k}
+                \combination{k}{i}
+                \frac{\partial^k f}{\partial x^{k-i} \partial y^{i}} (x(t), y(t))
+                \cdot
+                (x_1 - x_0)^{k-i}
+                (y_1 - y_0)^{i}
+        \end{equation}
+        が成立する．ただし$n, \varphi, f, x, y$は講義資料で定義されたものである．
+    \end{proposition}
+\end{screen}
+
+この命題は，テイラーの定理（2変数 version）の証明のなかで
+「同様に連鎖律をくり返し使うことにより…」と議論が省略されている部分です．
+
+\begin{proof}
+    $\Delta x = x_1 - x_0, \Delta y = y_1 - y_0$とおく．
+    まず$k=1$に対して\cref{proposition:1}は明らかに成立する．
+    つぎに$k\,(=1,2,\dots,n)$を任意にとり，\cref{proposition:1}の成立を仮定する．
+    \cref{proposition:1}の両辺を$t$で微分して次を得る．
+    \begin{alignat}{1}
+        \varphi^{k+1}(t) &= 
+            \sum_{i=0}^{k}
+                \combination{k}{i}
+                \bigg\{
+                \frac{\partial^{k+1} f}{\partial x^{k+1-i} \partial y^{i}} (x(t), y(t))
+                \Delta x^{k+1-i}
+                \Delta y^{i} \nonumber \\
+        &\quad +
+                \frac{\partial^{k+1} f}{\partial x^{k-i} \partial y^{i+1}} (x(t), y(t))
+                \Delta x^{k-i}
+                \Delta y^{i+1}
+                \bigg\} \\
+        &= 
+            \sum_{i=0}^{k}
+                \combination{k}{i}
+                \frac{\partial^{k+1} f}{\partial x^{k+1-i} \partial y^{i}} (x(t), y(t))
+                \Delta x^{k+1-i}
+                \Delta y^{i} \nonumber \\
+        &\quad +
+            \sum_{i=0}^{k}
+                \combination{k}{i}
+                \frac{\partial^{k+1} f}{\partial x^{k-i} \partial y^{i+1}} (x(t), y(t))
+                \Delta x^{k-i}
+                \Delta y^{i+1} \\
+        % 一段ずらす
+        &= 
+            \sum_{i=0}^{k}
+                \combination{k}{i}
+                \frac{\partial^{k+1} f}{\partial x^{k+1-i} \partial y^{i}} (x(t), y(t))
+                \Delta x^{k+1-i}
+                \Delta y^{i} \nonumber \\
+        &\quad +
+            \sum_{i=1}^{k+1}
+                \combination{k}{i-1}
+                \frac{\partial^{k+1} f}{\partial x^{k+1-i} \partial y^{i}} (x(t), y(t))
+                \Delta x^{k+1-i}
+                \Delta y^{i} \\
+        &= 
+            \frac{\partial^{k+1} f}{\partial x^{k+1}} (x(t), y(t))
+            \Delta x^{k+1}
+            +
+            \frac{\partial^{k+1} f}{\partial y^{k+1}} (x(t), y(t))
+            \Delta y^{k+1} \nonumber \\
+        &\quad +
+            \sum_{i=1}^{k}
+                \combination{k+1}{i}
+                \frac{\partial^{k+1} f}{\partial x^{k+1-i} \partial y^{i}} (x(t), y(t))
+                \Delta x^{k+1-i}
+                \Delta y^{i} \\
+        &=
+            \sum_{i=0}^{k+1}
+                \combination{k+1}{i}
+                \frac{\partial^{k+1} f}{\partial x^{k+1-i} \partial y^{i}} (x(t), y(t))
+                \Delta x^{k+1-i}
+                \Delta y^{i}
+    \end{alignat}
+    したがって$k+1$に対しても\cref{proposition:1}が成立する．
+    以上より，自然数$k=1,2,\dots,n+1$に対して\cref{proposition:1}が成立する．
+\end{proof}
+
+% ==========
+% 2.9
+% ==========
+\subsection{$C^2$級の2変数関数の極大・極小}
+
+\subsubsection{極値を取るための必要条件}
+\begin{screen}
+    \begin{proposition}
+        点$(x_0, y_0)$で$f$が極大，または極小になるならば
+        \begin{equation}
+            \frac{\partial f}{\partial x}(x_0, y_0) = 0
+            \quad \mbox{かつ} \quad
+            \frac{\partial f}{\partial y}(x_0, y_0) = 0
+        \end{equation}
+        である．ただし$x_0, y_0, f$は講義資料で定義されたものである．
+    \end{proposition}
+\end{screen}
+
+この命題は「すぐにわかる」ものです．
+
+\begin{proof}
+    点$(x_0, y_0)$が$f$の極大点である場合を示す．極小点の場合も同様である．
+    一変数関数$g, h$を$g(x) = f(x, y_0),\,h(y) = f(x_0, y)$と定めると，
+    $g, h$はそれぞれ点$x_0, y_0$で微分可能であって局所的に最大となる．
+    したがって，共通資料第4章命題2より
+    点$x_0, y_0$はそれぞれ$g, h$の停留点である．よって
+    \begin{equation}
+        \frac{\partial f}{\partial x}(x_0, y_0) = g'(x_0) = 0
+        ,\quad
+        \frac{\partial f}{\partial y}(x_0, y_0) = h'(y_0) = 0
+    \end{equation}
+    が従う．
+\end{proof}
+
+\subsubsection{$A, B, C$ と $a, b, c$ の関係性}
+\begin{screen}
+    \begin{proposition}
+        $(x_0, y_0)$に十分近い任意の点$(x, y)$に対して
+        \begin{equation}
+            A > 0
+            \,\mbox{かつ}\,
+            AC - B^2 > 0
+            \quad \Longrightarrow \quad
+            \mbox{常に}\,
+            a > 0
+            \,\mbox{かつ}\,
+            ac - b^2 > 0
+        \end{equation}
+        が成立する．ただし$x, y, x_0, y_0, A, B, C, a, b, c$は講義資料で定義されたものである．
+    \end{proposition}
+\end{screen}
+
+この命題は，$A, B, C$に関する大小関係がまわりの$a, b, c$に関しても成立するというものです．
+
+\begin{proof}
+    $(x, y) \rightarrow (x_0, y_0)$で
+    \begin{alignat}{1}
+        a &\rightarrow A > 0 \\
+        ac - b^2 &\rightarrow AC - B^2 > 0
+    \end{alignat}
+    なので，ある$\delta > 0$が存在して
+    \begin{equation}
+        0 < \| (x, y) - (x_0, y_0) \| < \delta
+        \quad \Longrightarrow \quad
+        a > 0
+        \,\mbox{かつ}\,
+        ac - b^2 > 0
+    \end{equation}
+    が成立する．
+\end{proof}
+
+\subsubsection{「$|t|$: 十分小」の意味}
+\begin{screen}
+    \begin{proposition}
+        「$|t|$: 十分小」という制約は，$f$が$C^2$級である領域の上だけを点$(x_0 + t, y_0)$が動くように課されている．
+    \end{proposition}
+\end{screen}
+
+「$AC-B^2<0$の場合」というスライドでは「$|t|$: 十分小」という制約が登場しますが，
+これは何のためにあるのか気になりませんか？
+O先生に尋ねたところ上のような回答でした．証明はとくにありません．
+
+\subsubsection{「iii) $A=0$のとき」の省略された計算}
+\begin{screen}
+    \begin{proposition}
+        講義資料のように
+        \begin{equation}
+            \varphi(t) = f(x_0 + p_1 t, y_0 + t),
+            \quad
+            \psi(t)    = f(x_0 + p_2 t, y_0 + t)
+        \end{equation}
+        とおくと次が成り立つ．
+        \begin{equation}
+            \varphi'(0) = \psi'(0) = 0,
+            \quad
+            \varphi''(0) = 2p_1 B + C,
+            \quad
+            \psi''(0)    = 2p_2 B + C
+        \end{equation}
+        ただし$x_0, y_0, p_1, p_2, B, C$は講義資料で定義されたものである．
+    \end{proposition}
+\end{screen}
+
+\begin{proof}
+    $\varphi$ についてのみ示す．$\psi$ の場合も同様である．
+    $f$が$C^2$級関数であることに注意すれば，$\varphi$の導関数は
+    \begin{alignat}{1}
+        \varphi'(t)
+        &=
+              \frac{\partial f}{\partial x}(x_0 + p_1 t, y_0 + t) \cdot p_1
+            + \frac{\partial f}{\partial y}(x_0 + p_1 t, y_0 + t) \cdot 1 \label{proposition:5:1} \\
+        \varphi''(t)
+        &=
+              \frac{\partial^2 f}{\partial x^2}(x_0 + p_1 t, y_0 + t) \cdot p_1^2 \nonumber \\
+        &\quad +
+            2 \frac{\partial^2 f}{\partial x \partial y}(x_0 + p_1 t, y_0 + t) \cdot p_1
+            + \frac{\partial^2 f}{\partial y^2}(x_0 + p_1 t, y_0 + t) \cdot 1 \label{proposition:5:2}
+    \end{alignat}
+    である．点$(x_0, y_0)$は$f$の停留点なので，\cref{proposition:5:1}より$\varphi'(0) = 0$である．
+    また，$A, B, C$の定義と$A = 0$に注意すれば，\cref{proposition:5:2}より
+    \begin{equation}
+        \varphi''(0) = 0 \cdot p_1^2 + 2B \cdot p_1 + C \cdot 1 = 2p_1 B + C
+    \end{equation}
+    を得る．
+\end{proof}
+\end{document}
