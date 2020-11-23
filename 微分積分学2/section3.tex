@@ -331,42 +331,20 @@
 \subsubsection{商のリーマン積分可能性}
 
 \begin{screen}
-    \begin{proposition}
-        関数$f:[a,b] \rightarrow \mathbb{R}$，$g:[a,b] \rightarrow \mathbb{R}$が
-        ともにリーマン積分可能であるとき，
-        \begin{equation}
-            \begin{cases}
-                \forall x \in [a, b] \quad \mbox{に対し} \quad g(x) \neq 0 \vspace{1em} \\
-                \mbox{関数$\dfrac{f}{g}: [a, b] \rightarrow \mathbb{R} \, \left(x \mapsto \dfrac{f(x)}{g(x)} \right)$が有界関数}
-            \end{cases}
-        \end{equation}
-        ならば，関数$\dfrac{f}{g}$もリーマン積分可能である．
-    \end{proposition}
-\end{screen}
-
-この証明のために\cref{lemma:2}を使います．補題の証明にはリーマンの判定法を利用します．
-
-\begin{proof}
-    \cref{lemma:2}により$\dfrac{1}{g}$はリーマン積分可能なので，
-    積のリーマン積分可能性により$\dfrac{f}{g}$もリーマン積分可能である．
-\end{proof}
-
-\begin{screen}
     \begin{lemma}
         \label{lemma:2}
         関数$g: [a, b] \rightarrow \mathbb{R}$がリーマン積分可能であるとき，
         \begin{equation}
             \label{lemma:2:0}
-            \begin{cases}
-                \forall x \in [a, b] \quad \mbox{に対し} \quad g(x) \neq 0 \vspace{1em} \\
-                \mbox{関数$\dfrac{1}{g}: [a, b] \rightarrow \mathbb{R} \, \left(x \mapsto \dfrac{1}{g(x)} \right)$が有界関数}
-            \end{cases}
+            \mbox{関数$\dfrac{1}{g}: [a, b] \rightarrow \mathbb{R} \, \left(x \mapsto \dfrac{1}{g(x)} \right)$が有界関数}
         \end{equation}
         ならば，関数
         $\dfrac{1}{g}: [a, b] \rightarrow \mathbb{R} \, \left(x \mapsto \dfrac{1}{g(x)}\right)$
         もリーマン積分可能である．
     \end{lemma}
 \end{screen}
+
+まずひとつ補題を証明しておきます．
 
 \begin{proof}
     \cref{lemma:2:0}により$M = \sup_{x \in [a, b]} \left| \dfrac{1}{g(x)} \right|$なる実数$M$が存在する．
@@ -400,5 +378,23 @@
     \end{equation}
     が成立する．したがって，リーマンの判定法により$\dfrac{1}{g}$はリーマン積分可能である．
 \end{proof}
+
+\begin{screen}
+    \begin{proposition}
+        関数$f:[a,b] \rightarrow \mathbb{R}$，$g:[a,b] \rightarrow \mathbb{R}$が
+        ともにリーマン積分可能であるとき，
+        \begin{equation}
+            \begin{cases}
+                \forall x \in [a, b] \quad \mbox{に対し} \quad g(x) \neq 0 \vspace{1em} \\
+                \mbox{関数$\dfrac{1}{g}: [a, b] \rightarrow \mathbb{R} \, \left(x \mapsto \dfrac{1}{g(x)} \right)$が有界関数}
+            \end{cases}
+        \end{equation}
+        ならば，関数$\dfrac{f}{g}$もリーマン積分可能である．
+    \end{proposition}
+\end{screen}
+
+講義資料のもともとの定理は$\dfrac{f}{g}$の有界性を前提としていますが，
+かわりに$\dfrac{1}{g}$の有界性を前提としたものを先に示しておきましょう．
+この証明には\cref{lemma:2}を使います．
 
 \end{document}
