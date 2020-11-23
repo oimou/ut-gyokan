@@ -16,4 +16,5 @@
 \contentsline {subsection}{\numberline {3.5}リーマン積分の基本性質}{7}
 \contentsline {subsubsection}{\numberline {3.5.1}リーマン積分の線型性(1)}{7}
 \contentsline {subsubsection}{\numberline {3.5.2}リーマン積分の線型性(2)}{8}
-\contentsline {subsubsection}{\numberline {3.5.3}積のリーマン積分可能性}{9}
+\contentsline {subsubsection}{\numberline {3.5.3}積のリーマン積分可能性}{8}
+\contentsline {subsubsection}{\numberline {3.5.4}商のリーマン積分可能性}{10}
