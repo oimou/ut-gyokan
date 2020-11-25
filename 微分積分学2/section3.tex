@@ -455,4 +455,65 @@
     $f$は有界関数であることに注意すれば，ルベーグの可積分条件によって$f$はリーマン積分不可能であるという矛盾を得る．
 \end{proof}
 
+\subsubsection{積分範囲の分割}
+
+\begin{screen}
+    \begin{proposition}
+        関数$f: [a, b] \rightarrow \mathbb{R}$がリーマン積分可能であるとき，
+        $a < c < b$となる任意の実数$c$に対して，関数$f$は$[a, b]$上でも$[c, b]$上でも
+        リーマン積分可能で，
+        \begin{equation}
+            \int_a^b f(x) dx = \int_a^c f(x) dx + \int_c^b f(x) dx
+        \end{equation}
+    \end{proposition}
+\end{screen}
+
+\begin{proof}
+    $f$はリーマン積分可能なので，任意の正数$\epsilon$に対して，ある$[a, b]$の分割$\triangle$が存在して
+    \begin{equation}
+        S(f: \triangle) - s(f: \triangle) < \epsilon
+    \end{equation}
+    が成立する．$\triangle$の分点に$c$を追加したものを$\triangle'$とおくと，
+    $\triangle'$は$\triangle$の細分なので
+    \begin{equation}
+        S(f: \triangle') - s(f: \triangle') < \epsilon
+    \end{equation}
+    が成立する．$\triangle'$の$[a, c]$の部分，$[c, b]$の部分をそれぞれ$\triangle_1, \triangle_2$とおく．
+    $\triangle_1$について
+    \begin{alignat}{1}
+        S(f: \triangle_1) - s(f: \triangle_1)
+            &\le S(f: \triangle_1) - s(f: \triangle_1) + S(f: \triangle_2) - s(f: \triangle_2) \\
+        &\le S(f: \triangle') - s(f: \triangle') \\
+        &< \epsilon
+    \end{alignat}
+    が成立するから，リーマンの判定法によれば$f$は$[a, c]$上でリーマン積分可能である．
+    $\triangle_2$についても同様の議論を行うことによって，$f$は$[c, b]$上でリーマン積分可能である．
+
+    さて，$f$は区間$[a, c], [c, b]$上でリーマン積分可能であるから，
+    リーマンの判定法によれば，それぞれの区間の分割の列$\{\triangle_{1,n}\}, \{\triangle_{2,n}\}$
+    であって$n \rightarrow \infty$で幅が0に収束するようなものが存在する．
+    このような$\{\triangle_{1,n}\}, \{\triangle_{2,n}\}$をひとつずつとり，
+    $\triangle_{1, n}$と$\triangle_{2, n}$を合わせたものを$\triangle_n$とおけば，
+    $\{\triangle_n\}$は$[a, b]$の分割の列であって，$n \rightarrow \infty$で幅が0に収束する．
+    ここで
+    \begin{equation}
+        S(f: \triangle_n) = S(f: \triangle_{1,n}) + S(f: \triangle_{2,n})
+    \end{equation}
+    であるから，
+    数学IA演習(2014年度)第9回講義資料
+    \footnote{\url{https://lecture.ecc.u-tokyo.ac.jp/~nkiyono/14_kami.html}}
+    の定理3より，
+    \begin{equation}
+        \int_a^b f(x) dx = \int_a^c f(x) dx + \int_c^b f(x) dx
+    \end{equation}
+    が成立する．
+\end{proof}
+
+\subsubsection{積分の平均値の定理}
+
+\begin{screen}
+    \begin{proposition}
+    \end{proposition}
+\end{screen}
+
 \end{document}
