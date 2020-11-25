@@ -402,4 +402,57 @@
     積のリーマン積分可能性により$\dfrac{f}{g}$もリーマン積分可能である．
 \end{proof}
 
+\begin{screen}
+    \begin{proposition}
+        関数$f:[a,b] \rightarrow \mathbb{R}$，$g:[a,b] \rightarrow \mathbb{R}$が
+        ともにリーマン積分可能であるとき，
+        \begin{equation}
+            \begin{cases}
+                \forall x \in [a, b] \quad \mbox{に対し} \quad g(x) \neq 0 \vspace{1em} \\
+                \mbox{関数$\dfrac{f}{g}: [a, b] \rightarrow \mathbb{R} \, \left(x \mapsto \dfrac{f(x)}{g(x)} \right)$が有界関数}
+            \end{cases}
+        \end{equation}
+        ならば，関数$\dfrac{f}{g}$もリーマン積分可能である．
+    \end{proposition}
+\end{screen}
+
+つぎに，講義資料のもともとの定理を示します．
+この証明にはルベーグの可積分条件
+\footnote{
+    杉浦 光夫『解析入門I』東京大学出版会〈基礎数学2〉p.266
+}
+を使います．
+零集合であることとルベーグ測度が0であることの同値性や，測度の基本的性質は認めるものとします．
+
+\begin{proof}
+    $\mu$をルベーグ測度とする．
+    $f, g, \dfrac{f}{g}$の不連続点全体の集合をそれぞれ$D, D_f, D_g$とおく．
+    $\dfrac{f}{g}$がリーマン積分不可能であると仮定して矛盾を導く．
+
+    $\dfrac{f}{g}$は有界関数なので，ルベーグの可積分条件によれば$\mu(D) > 0$である．
+    一方$f, g$はリーマン可積分なので$\mu(D_f) = \mu(D_g) = 0$であり，
+    したがって$\mu(D \cap D_f) = \mu(D \cap D_g) = 0$である
+    \footnote{
+        $D \cap D_f \subset D_f$なので，測度の単調性より$\mu(D \cap D_f) \le \mu(D_f)$が成立します．
+        このことと，測度の非負性および$\mu(D_f) = 0$より$\mu(D \cap D_f) = 0$が従います．
+        $D_g$についても同様です．
+    }
+    ．
+
+    ここで，$D$の点$x$であって$g$が$x$で連続であるようなもの全体の集合，
+    すなわち$D \setminus (D_g \cap D)$について
+    \begin{alignat}{1}
+        \mu(D \setminus (D_g \cap D)) &= \mu(D) - \mu(D_g \cap D) \quad (\because D_g \cap D \subset D) \\
+        &= \mu(D) \quad (\because \mu(D \cap D_g) = 0)\\
+        &> 0
+    \end{alignat}
+    が成立する．一方，$D$の任意の点$x$に対して
+    \begin{equation}
+        \mbox{$g$が$x$で連続ならば$f = \dfrac{f}{g} g$は$x$で不連続である}
+    \end{equation}
+    が成立するから，$D \setminus (D_g \cap D) \subset D_f \cap D$である．
+    したがって$\mu(D_f) \ge \mu(D_f \cap D) \ge \mu(D \setminus (D_g \cap D)) > 0$である．
+    $f$は有界関数であることに注意すれば，ルベーグの可積分条件によって$f$はリーマン積分不可能であるという矛盾を得る．
+\end{proof}
+
 \end{document}
