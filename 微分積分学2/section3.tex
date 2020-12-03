@@ -655,4 +655,45 @@
     が成立する．
 \end{proof}
 
+% ==========
+% 3.7
+% ==========
+\subsection{広義積分}
+\subsubsection{上に有界な広義単調増加関数の収束先}
+
+\begin{screen}
+    \begin{proposition}
+        上に有界な広義単調増加関数はその上限に収束する．
+    \end{proposition}
+\end{screen}
+
+「非負関数の優関数による判定法」の証明のなかでこの命題が使われていますので，証明しておきます．
+
+\begin{proof}
+    関数$f: [a, b) \rightarrow \mathbb{R}$を考える．
+    $f$は上に有界なので，実数の連続性により上限$M = \sup_{x \in [a, b)} f(x)$が存在する．
+    ここで，正数$\epsilon$を任意にとる．
+    $M$は$f$の上限であるから，ある$\xi \in [a, b)$が存在して
+    \begin{equation}
+        \label{proposition:imp:1}
+        M - \epsilon < f(\xi) \le M
+    \end{equation}
+    が成立する．
+    一方，$f$は広義単調増加なので，$x > \xi$なる任意の$x$に対して
+    \begin{equation}
+        \label{proposition:imp:2}
+        f(x) \ge f(\xi)
+    \end{equation}
+    が成立する．
+    したがって，\cref{proposition:imp:1}，\cref{proposition:imp:2}より
+    \begin{equation}
+        M - f(x) \le M - f(\xi) < \epsilon
+    \end{equation}
+    が成立する．以上より
+    \begin{equation}
+        \lim_{x \rightarrow b} f(x) = M
+    \end{equation}
+    である．
+\end{proof}
+
 \end{document}
