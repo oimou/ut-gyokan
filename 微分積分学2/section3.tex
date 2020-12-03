@@ -381,6 +381,7 @@
 
 \begin{screen}
     \begin{proposition}
+        \label{proposition:8}
         関数$f:[a,b] \rightarrow \mathbb{R}$，$g:[a,b] \rightarrow \mathbb{R}$が
         ともにリーマン積分可能であるとき，
         \begin{equation}
@@ -404,6 +405,7 @@
 
 \begin{screen}
     \begin{proposition}
+        \label{proposition:9}
         関数$f:[a,b] \rightarrow \mathbb{R}$，$g:[a,b] \rightarrow \mathbb{R}$が
         ともにリーマン積分可能であるとき，
         \begin{equation}
@@ -417,7 +419,18 @@
 \end{screen}
 
 つぎに，講義資料のもともとの定理を示します．
-この証明にはルベーグの可積分条件
+できれば\cref{proposition:8}を利用したいところですが，
+残念ながら\cref{proposition:9}の前提を満たしても\cref{proposition:8}の前提を満たすとは限らない
+\footnote{
+    有界閉区間$[0, 1]$上で$f, g$を次のように定めたものはそのような例のひとつです．
+    \begin{alignat}{1}
+        f(x) &= x \\
+        g(x) &= x (x ≠ 0), 1 (x = 0)
+    \end{alignat}
+}
+ので利用できません．
+
+そこで，この証明にはルベーグの可積分条件
 \footnote{
     杉浦 光夫『解析入門I』東京大学出版会〈基礎数学2〉p.266
 }
@@ -453,6 +466,75 @@
     が成立するから，$D \setminus (D_g \cap D) \subset D_f \cap D$である．
     したがって$\mu(D_f) \ge \mu(D_f \cap D) \ge \mu(D \setminus (D_g \cap D)) > 0$である．
     $f$は有界関数であることに注意すれば，ルベーグの可積分条件によって$f$はリーマン積分不可能であるという矛盾を得る．
+\end{proof}
+
+\subsubsection{被積分関数の大小と積分値の大小}
+
+まずひとつ補題を証明しておきます．
+
+\begin{screen}
+    \begin{lemma}
+        \label{lemma:3}
+        関数$f: [a, b] \rightarrow \mathbb{R}$がリーマン積分可能であるとき，
+        \begin{equation}
+            \label{lemma:3:1}
+            \forall x \in [a, b] \,\mbox{に対して}\, f(x) \ge 0
+            \quad \Longrightarrow \quad
+            \int_a^b f(x) dx \ge 0
+        \end{equation}
+        が成立する．とくに$f$が連続であるとすると，
+        右辺の等号が成立するのは$f$の値が恒等的に$0$のとき，またそのときのみである．
+    \end{lemma}
+\end{screen}
+
+\begin{proof}
+    任意の分割$\triangle$と任意の代表点集合$\mathbf{\xi}$に対して
+    \begin{equation}
+        \label{lemma:3:2}
+        R(f: \triangle, \mathbf{\xi}) \ge \inf_{x \in [a, b]} f(x) (b - a)
+    \end{equation}
+    であり，$\forall x \in [a, b]$に対して$f(x) \ge 0$であると仮定すると
+    \cref{lemma:3:2}の右辺は$0$以上である．
+    したがって
+    \begin{equation}
+        \int_a^b f(x) dx \ge 0
+    \end{equation}
+    である．
+
+    以下，$f$は連続であるとする．$f$の値が恒等的に$0$ならば，明らかに
+    \begin{equation}
+        \int_a^b f(x) dx = 0
+    \end{equation}
+    である．一方，ある$c \in [a, b]$が存在して$f(c) > 0$であると仮定する．
+    このような$c$をひとつとる．
+    $f$の連続性により，ある正数$\delta$が存在して，
+    閉区間$I = [c-\delta, c+\delta] \cap [a, b]$上で$f$は常に正の値をとる．
+    よって$f$の$I$上での積分値は正である．
+    また，この証明の前半の議論によれば$f$の$[a, b] \setminus I$上での積分値は非負である．
+    これらを足し合わせることにより
+    \begin{equation}
+        \int_a^b f(x) dx > 0
+    \end{equation}
+    が従う．
+\end{proof}
+
+\begin{screen}
+    \begin{proposition}
+        \label{proposition:inequality}
+        関数$f: [a, b] \rightarrow \mathbb{R}$，$g: [a, b] \rightarrow \mathbb{R}$が
+        ともにリーマン積分可能であるとき，
+        \begin{equation}
+            \forall x \in [a, b] \,\mbox{に対して}\, f(x) \le g(x)
+            \quad \Longrightarrow \quad
+            \int_a^b f(x) dx \le \int_a^b g(x) dx
+        \end{equation}
+        が成立する．とくに$f, g$が連続であるとすると，
+        右辺の等号が成立するのは$f, g$が恒等的に等しいとき，またそのときのみである．
+    \end{proposition}
+\end{screen}
+
+\begin{proof}
+    \cref{lemma:3}とリーマン積分の線型性からすぐにわかる．
 \end{proof}
 
 \subsubsection{積分範囲の分割}
@@ -516,6 +598,7 @@
         関数$f: [a, b] \rightarrow \mathbb{R}$がリーマン積分可能であるとき，
         $f$の上限，下限をそれぞれ$M, m$とすると，
         \begin{equation}
+            \label{proposition:avg:1}
             m \le \frac{1}{b - a} \int_a^b f(x) dx \le M
         \end{equation}
         が成立する．とくに$f$が連続ならば，$a < c < b$なる$c$が存在して
@@ -527,7 +610,49 @@
 \end{screen}
 
 \begin{proof}
-    
+    任意の分割$\triangle$と任意の代表点集合$\mathbf{\xi}$に対して
+    \begin{equation}
+        m(b-a) \le R(f: \triangle, \mathbf{\xi}) \le M(b-a)
+    \end{equation}
+    であるから，
+    \begin{equation}
+        m(b-a) \le \int_a^b f(x) dx \le M(b-a)
+    \end{equation}
+    すなわち\cref{proposition:avg:1}が成立する．
+
+    以下，$f$が連続であるとする．
+    最大値の定理により$m, M$はそれぞれ$f$の最小値，最大値に等しい．
+
+    まず$m = M$の場合を考える．
+    これは$f$が定数関数ということであるから，
+    $a < c < b$なる任意の$c$に対して$f(c) = m$である．
+    一方，\cref{proposition:avg:1}によれば
+    \begin{equation}
+        m = \frac{1}{b - a} \int_a^b f(x) dx
+    \end{equation}
+    である．したがって，$a < c < b$なる$c$が存在して
+    \begin{equation}
+        \frac{1}{b - a} \int_a^b f(x) dx = f(c)
+    \end{equation}
+    が成立する．
+
+    つぎに$m < M$の場合を考える．
+    このとき，$f$は恒等的には$f(x) = m$でも$f(x) = M$でもないから，
+    \cref{proposition:inequality}より
+    \begin{equation}
+        m(b-a) = \int_a^b m dx < \int_a^b f(x) dx < \int_a^b M dx = M(b-a)
+    \end{equation}
+    すなわち
+    \begin{equation}
+        m < \frac{1}{b-a} \int_a^b f(x) dx < M
+    \end{equation}
+    である．一方，中間値の定理によれば，$m < y < M$なる任意の$y$に対して，
+    $y = f(c),\, a < c < b$なる$c$が存在する．
+    したがって，$a < c < b$なる$c$が存在して
+    \begin{equation}
+        \frac{1}{b - a} \int_a^b f(x) dx = f(c)
+    \end{equation}
+    が成立する．
 \end{proof}
 
 \end{document}
