@@ -1,0 +1,80 @@
+\documentclass[./index]{subfiles}
+\begin{document}
+
+% ==========
+% 4.1
+% ==========
+\section{多変数関数の積分（重積分）}
+\subsection{多重有界閉区間上の重積分の定義から基本性質まで}
+\subsubsection{区分求積法の成立}
+\begin{screen}
+    \begin{proposition}
+        関数$f:K \rightarrow \mathbb{R}$が重積分可能であるとき，
+        $\lim_{n\rightarrow\infty} |\triangle_n| = 0$なる
+        $K$の分割の列$\{\triangle_n\}_{n=1,2,\dots}$を任意にとり，
+        各$\triangle_n$の代表点集合$\mathbf{\xi_n}$を任意にとれば，
+        \begin{equation}
+            \lim_{n\rightarrow\infty} R(f: \triangle_n, \mathbf{\xi_n})
+            =
+            \iint_K f(x, y) dx dy
+        \end{equation}
+        が成立する．
+    \end{proposition}
+\end{screen}
+
+こちらは重積分可能性の定義から区分求積法の成立を導くものです．
+証明の流れは1変数のときとほぼ同じです．余裕があれば詳細を書きます．
+
+\subsubsection{非有界関数の重積分不可能性}
+\begin{screen}
+    \begin{proposition}
+        関数$f: K \rightarrow \mathbb{R}$が有界でなければ，$f$は$K$上で重積分可能ではない．
+    \end{proposition}
+\end{screen}
+
+証明の流れは1変数のときとほぼ同じです．余裕があれば詳細を書きます．
+
+\subsubsection{連続関数の重積分可能性}
+\begin{screen}
+    \begin{proposition}
+        関数$f: K \rightarrow \mathbb{R}$について，
+        \begin{equation}
+            \mbox{$f$が区間$K$上で連続} \quad \Longrightarrow \quad \mbox{$f$は区間$K$上で重積分可能}
+        \end{equation}
+    \end{proposition}
+\end{screen}
+
+証明の流れは1変数のときとほぼ同じです．余裕があれば詳細を書きます．
+
+\subsubsection{リーマンの判定法}
+\begin{screen}
+    \begin{proposition}
+        有界関数$f: K \rightarrow \mathbb{R}$について， \\
+        $\forall \epsilon > 0$に対し，区間$K$のある分割$\triangle$が存在して
+        $S(f: \triangle) - s(f: \triangle) < \epsilon$となる． \\
+        \quad $\Longleftrightarrow$ $f$が区間$K$上で重積分可能 \\
+        （このとき，$\underline{\iint_K} f(x, y) dx dy = \overline{\iint_K} f(x, y) dx dy
+            = \iint_K f(x, y) dx dy$が成立する）
+    \end{proposition}
+\end{screen}
+
+余力があれば証明を書きます．
+
+\subsubsection{重積分の基本性質}
+
+証明の流れは1変数のときとほぼ同じです．余裕があれば詳細を書きます．
+
+% ==========
+% 4.2
+% ==========
+\subsection{多重閉区間上の反復積分とフビニ（?）の定理}
+\subsubsection{$M_i$，$m_i$の存在証明}
+\begin{screen}
+    \begin{proposition}
+        関数$f: K \rightarrow \mathbb{R}$は重積分可能であるとする．
+        また，$\forall x \in [a, b]$に対し$f(x, y)$が$[c, d]$上$y$で積分可能であるとする．
+        このとき，$F(x) = \int_c^d f(x, y) dy$とおくと$F(x)$は$[a, b]$において上限と下限を持つ．
+    \end{proposition}
+\end{screen}
+
+\end{document}
