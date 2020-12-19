@@ -1,0 +1,50 @@
+\documentclass[./index]{subfiles}
+\begin{document}
+
+\section{級数と冪級数}
+
+% ==========
+% 5.1
+% ==========
+\subsection{$\mathbb{R}$における級数の収束と発散}
+\subsubsection{高校数学でやったこと④}
+\begin{screen}
+    \begin{proposition}
+        \begin{equation}
+            \sum_{n = 1}^{\infty} a_n \mbox{ が収束する}
+            \quad \Longrightarrow \quad
+            \lim_{n \rightarrow \infty} a_n = 0
+        \end{equation}
+    \end{proposition}
+\end{screen}
+
+\begin{proof}
+    正数$\epsilon$を任意にとる．
+    $\sum_{n = 1}^{\infty} a_n$が収束するから，
+    ある自然数$N$が存在して，
+    $m > N$なる任意の自然数$m$に対して
+    \begin{equation}
+        \left| \sum_{n = 1}^{m} a_n - S \right| < \frac{\epsilon}{2}
+    \end{equation}
+    が成立する．ただし，$S = \sum_{n = 1}^{\infty} a_n$である．
+    よって，ある自然数$N$が存在して，
+    $m > N$なる任意の自然数$m$に対して
+    \begin{equation}
+        \begin{cases}
+            \displaystyle S - \frac{\epsilon}{2} < \sum_{n = 1}^{m} a_n < S + \frac{\epsilon}{2} \\
+            \displaystyle S - \frac{\epsilon}{2} < \sum_{n = 1}^{m - 1} a_n < S + \frac{\epsilon}{2}
+        \end{cases}
+    \end{equation}
+    が成立し，したがって
+    \begin{equation}
+        |a_m| = \left| \sum_{n = 1}^{m} a_n - \sum_{n = 1}^{m - 1} a_n \right| < \epsilon
+    \end{equation}
+    が成立する．
+    よって，
+    \begin{equation}
+        \lim_{n \rightarrow \infty} a_n = 0
+    \end{equation}
+    が成立する．
+\end{proof}
+
+\end{document}
