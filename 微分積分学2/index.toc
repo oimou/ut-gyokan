@@ -40,3 +40,5 @@
 \contentsline {section}{\numberline {5}級数と冪級数}{19}
 \contentsline {subsection}{\numberline {5.1}$\mathbb {R}$における級数の収束と発散}{19}
 \contentsline {subsubsection}{\numberline {5.1.1}高校数学でやったこと④}{19}
+\contentsline {subsection}{\numberline {5.6}収束冪級数の微分と積分}{20}
+\contentsline {subsubsection}{\numberline {5.6.1}$r \le r'$の証明}{20}

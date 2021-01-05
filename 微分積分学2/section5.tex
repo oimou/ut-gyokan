@@ -19,32 +19,43 @@
 \end{screen}
 
 \begin{proof}
-    正数$\epsilon$を任意にとる．
-    $\sum_{n = 1}^{\infty} a_n$が収束するから，
-    ある自然数$N$が存在して，
-    $m > N$なる任意の自然数$m$に対して
+    級数$\sum_{n=1}^\infty a_n$の値を$\alpha$とおき，第$n$部分和を$S_n$とおくと，
     \begin{equation}
-        \left| \sum_{n = 1}^{m} a_n - S \right| < \frac{\epsilon}{2}
+        \lim_{n \rightarrow \infty} S_n = \lim_{n \rightarrow \infty} S_{n-1} = \alpha
     \end{equation}
-    が成立する．ただし，$S = \sum_{n = 1}^{\infty} a_n$である．
-    よって，ある自然数$N$が存在して，
-    $m > N$なる任意の自然数$m$に対して
+    であるから
     \begin{equation}
-        \begin{cases}
-            \displaystyle S - \frac{\epsilon}{2} < \sum_{n = 1}^{m} a_n < S + \frac{\epsilon}{2} \\
-            \displaystyle S - \frac{\epsilon}{2} < \sum_{n = 1}^{m - 1} a_n < S + \frac{\epsilon}{2}
-        \end{cases}
+        \lim_{n \rightarrow \infty} a_n
+        = \lim_{n \rightarrow \infty} (S_n - S_{n-1})
+        = \alpha - \alpha
+        = 0
     \end{equation}
-    が成立し，したがって
-    \begin{equation}
-        |a_m| = \left| \sum_{n = 1}^{m} a_n - \sum_{n = 1}^{m - 1} a_n \right| < \epsilon
-    \end{equation}
-    が成立する．
-    よって，
-    \begin{equation}
-        \lim_{n \rightarrow \infty} a_n = 0
-    \end{equation}
-    が成立する．
+    である．
+\end{proof}
+
+% ==========
+% 5.6
+% ==========
+\setcounter{subsection}{5}
+\subsection{収束冪級数の微分と積分}
+\subsubsection{$r \le r'$の証明}
+\begin{screen}
+    \begin{proposition}
+        $c, r, r'$を実数とし，任意の実数$x$に対して
+        \begin{equation}
+            \label{eq:5:6:1}
+            |x - c| < r \quad \mbox{ならば} \quad |x - c| \le r'
+        \end{equation}
+        が成り立つとする．このとき$r \le r'$である．
+    \end{proposition}
+\end{screen}
+
+講義資料では「ここで，$x$は$|x - c| < r$となる任意の実数であったから，$r \le r'$と分かる．」
+と述べられている部分です．より厳密には背理法で示すことができます．
+
+\begin{proof}
+    $r > r'$と仮定すると，稠密性により$r' < |x - c| < r$なる実数$x$が存在するが，
+    これは\cref{eq:5:6:1}に矛盾する．
 \end{proof}
 
 \end{document}
